@@ -1,0 +1,17 @@
+:host {
+  position: absolute;
+}
+
+img {
+  height: 10vh;
+  cursor: pointer;
+}
+
+.remove {
+  float: right;
+  cursor: pointer;
+}
+
+#hideSwitch {
+  cursor: pointer;
+}

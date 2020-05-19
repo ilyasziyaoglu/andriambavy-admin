@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-12">
+        <ngx-desktop [model]="currentModel" [accessories]="currentAccessories"
+                     [currentElement]="currentElement"></ngx-desktop>
+    </div>
+    <div class="col-sm-9">
+        <mat-tab-group [selectedIndex]="currentMatTabIndex"
+                       (selectedIndexChange)="currentMatTabIndex = $event">
+
+            <mat-tab label="MODEL">
+                <ng-template matTabContent>
+                    <ngx-model-gallery [models]="models"
+                                       (modelSelect)="onModelSelect($event)">
+                    </ngx-model-gallery>
+                </ng-template>
+            </mat-tab>
+
+            <mat-tab *ngFor="let type of accessories| keyvalue" [label]="type.key.toString() | uppercase">
+                <ng-template matTabContent>
+                    <mat-tab-group>
+                        <mat-tab *ngFor="let subtype of type.value | keyvalue"
+                                 [label]="subtype.key.toString() | uppercase">
+                            <ng-template matTabContent>
+                                <ngx-accessory-gallery [accessories]="subtype.value"
+                                                       (accessorySelect)="onAccessorySelect($event)">
+                                </ngx-accessory-gallery>
+                            </ng-template>
+                        </mat-tab>
+                    </mat-tab-group>
+                </ng-template>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="row h-100">
+
+  <div class="col-sm-9">
+    <div class="row w-100 m-3 d-flex justify-content-end" *ngIf="model && accessories">
+        <div class="col-sm-3">
+            <h4 style="font-weight: lighter;">{{model.price + sum(accessories, 'price')}} $</h4>
+        </div>
+    </div>
+    <ngx-model class="w-100 m-0" *ngIf="model" [model]="model"
+               (modelSelect)="onModelElementSelect()">
+    </ngx-model>
+
+    <ngx-accessory cdkDrag (cdkDragEnded)="onDragEnded($event)" *ngFor="let accessory of accessories"
+                   [accessory]="accessory"
+                   style="left: 0; top: 0;"
+                   [properties]="accessory.properties.props[accessory.cma][accessory.location][model.angle]"
+                   (accessoryElementRemove)="onRemoveAccessoryElement($event)"
+                   (click)="onAccessoryElementSelect(accessory)"></ngx-accessory>
+
+
+    <div *ngIf="currentElement && currentElement != model">
+        <div class="point rounded-circle bg-success"
+             *ngFor="let location of currentElement.properties.props[currentElement.cma] | keyvalue"
+             (click)="ngOnLocationChange(location.key)"
+             [style.left]="location.value[model.angle].x + '%'"
+             [style.top]="location.value[model.angle].y + '%'">
+        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3 p-3">
+    <ngx-color-manager *ngIf="currentColorModel" [currentColorModel]="currentColorModel"></ngx-color-manager>
+    <hr>
+    <ngx-property-manager *ngIf="environment.isAdmin && accessories?.length"
+                          (newLocation)="onAddNewLocation()"
+                          (save)="onSaveProperties()"
+                          [accessory]="currentElement"
+                          [properties]="currentElement.properties.props[currentElement.cma][currentElement.location][model?.angle]">
+    </ngx-property-manager>
+  </div>
+</div>
+

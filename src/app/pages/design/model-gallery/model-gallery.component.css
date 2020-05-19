@@ -1,0 +1,16 @@
+.row {
+  margin: 0;
+}
+
+.card-bar {
+  background-color: black;
+  color: white;
+}
+
+.model {
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+}

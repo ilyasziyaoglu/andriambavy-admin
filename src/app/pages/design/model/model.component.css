@@ -1,0 +1,16 @@
+.icon-360 {
+  width: 3rem;
+}
+
+img {
+  max-width: 100%;
+  max-height: 50vh;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+.angle-range {
+  display: block;
+  margin: auto;
+}
